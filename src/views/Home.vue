@@ -2,45 +2,20 @@
 import { ref, computed } from 'vue'
 import data from "../data.json"
 import Filters from '../components/Filters.vue'
+import Header from '../components/Header.vue'
+import Button from '../components/Button.vue'
+import JobCard from '../components/JobCard.vue'
 
 const jobs = ref(data)
 
-const filterSearchTerm = ref('')
-const filterLocation = ref('')
-const filterFullTimeOnly = ref(false)
 
-const pageSize = ref(12)
-const page = ref(1)
-const allPagesLoaded = ref(page.value * pageSize.value > jobs.value.length ? true : false);
 
 const filteredJobs = ref(jobs.value)
 
+const pageSize = ref(12)
+const page = ref(1)
+const allPagesLoaded = ref(page.value * pageSize.value > jobs.value.length ? true : false || filteredJobs.value.length < pageSize.value)
 
-function filterByLocation(jobs){
-  return jobs.filter(job => job.location.toLocaleLowerCase().includes(filterLocation.value.toLocaleLowerCase()))
-}
-
-function filterBySearchTerm(jobs) {
-  console.log(jobs);
-  return jobs.filter(job => job.company.toLocaleLowerCase().includes(filterSearchTerm.value.toLocaleLowerCase()) ||
-                            job.position.toLocaleLowerCase().includes(filterSearchTerm.value.toLocaleLowerCase()))
-}
-
-function filterByFullTimeOnly(jobs) {
-
-  if(filterFullTimeOnly.value){
-     return jobs.filter(job => job.contract.toLocaleLowerCase().includes('full'));
-  }
-  
-  return jobs
-}
-
-function filterJobs(jobs){
-
-  filteredJobs.value = filterByLocation(filterBySearchTerm(filterByFullTimeOnly(jobs)));
-
-  return filteredJobs.value;
-}
 
 function loadMoreJobs() {
 
@@ -52,29 +27,37 @@ function loadMoreJobs() {
   }
 }
 
+function updateJobsList(updatedJobs) {
+  filteredJobs.value = updatedJobs;
+}
+
 </script>
 
 <template>
-  <form v-on:submit.prevent="filterJobs(jobs)">
-    <input v-model="filterSearchTerm" type="text" placeholder="Filter by title, companies, experties..."/>
-    <input v-model="filterLocation" type="text" placeholder="Filter by location..."/>
-    <label>
-      <input v-model="filterFullTimeOnly" type="checkbox"/>
-      Full Time Only
-    </label>
-    <button>Search</button>
-  </form>
-  {{filterLocation }}
-  <div v-for="job in filteredJobs.slice(0, pageSize * page)" :key="job.id">
-    <router-link :to="{name: 'job.detail', params: {id: job.id}}">{{job.location}}</router-link>
+  <div class="container container--mb">
+    <Filters :jobs="jobs" :filteredJobs="filteredJobs" @update-jobs-list="updateJobsList"/>
+    <div class="jobs">
+      <JobCard  v-for="job in filteredJobs.slice(0, pageSize * page)" :logo="job.logo" :logo-background="job.logoBackground" :posted-at="job.postedAt" :contract="job.contract" :position="job.position" :company="job.company" :job-id="job.id" :location="job.location" :key="job.id">
+
+      </JobCard>
+    </div>
+    <Button v-if="!allPagesLoaded" variant="primary" v-on:click="loadMoreJobs" >
+      Load More
+    </Button>
   </div>
-  <button v-on:click="loadMoreJobs" v-if="!allPagesLoaded">
-    Load More
-  </button>
 </template>
 
-<style scoped>
-a {
-  color: #42b983;
+<style scoped lang="scss">
+.jobs {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 65px 30px;
+  margin: 3.5rem 0;
+  @media (max-width: 960px){
+    grid-template-columns: repeat(2,1fr);
+  }
+  @media (max-width: 520px){
+    grid-template-columns: repeat(1,1fr);
+  }
 }
 </style>

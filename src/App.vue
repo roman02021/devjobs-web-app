@@ -3,25 +3,21 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Home from './views/Home.vue'
 import Job from './views/Job.vue';
-import { store } from './store.js'
+import Header from './components/Header.vue'
+import { themeStore } from './store.js'
 import { CONSTANTS } from './constants';
 
 
 </script>
 
 <template>
-  <div class="app-container" :class="{dark: store.isDark()}">
-    <header class="header">
-      <img class="header-logo" src="./assets/desktop/logo.svg"/>
-      <button @click="store.switchTheme()">switch theme</button>
-    </header>
-    <div class="container">
-      <router-view></router-view>
-    </div>
+  <div class="app-container" :class="{dark: themeStore.isDark()}">
+    <Header/>
+    <router-view></router-view>
   </div>
 </template>
 
-<style>
+<style lang="scss">
 body, html {
   padding: 0;
   margin: 0;
@@ -47,14 +43,40 @@ input, button {
 }
 
 :root {
-  --violet: #9e7f66;
+  //colors
+  --violet: #5964E0;
   --light-violet: #939BF4;
   --very-dark-blue: #19202D;
   --midnight: #121721;
   --white: #FFFFFF;
   --light-gray: #F4F6F8;
+  --checkbox-gray: #19202D10;
+  --checkbox-gray-hover: #5964E025;
   --gray: #9DAEC2;
   --dark-grey: #6E8098;
+  --input-blue: #5964E0;
+
+  --secondary-violet: #5964E010;
+  --hover-secondary-violet: #5964E035;
+
+  --secondary-dark: #FFFFFF10;
+  --secondary-dark-hover: #FFFFFF35;
+
+  --radius: 6px;
+
+  //transition speeds
+  --slow: .5s;
+  --normal: .3s;
+  --fast: .1s;
+
+  //theme transition
+  --theme-speed: .3s;
+  --theme-timing: ease-in-out;
+
+  --container-gap: 1.5rem;
+  --desktop-max-width: 1110px;
+  --desktop-container-width: calc(var(--desktop-max-width) - var(--container-gap) * 2);
+  
 }
 #app {
   font-family: "Kumbh", sans-serif;
@@ -69,6 +91,8 @@ input, button {
 .app-container {
   background-color: var(--light-gray);
   height: 100%;
+  overflow-x: hidden;
+  transition: background-color var(--theme-speed) var(--theme-timing);
 }
 .app-container.dark {
   background-color: var(--midnight);
@@ -84,6 +108,7 @@ h2 {
 h3 {
   font-size: 1.25rem;
   line-height: 24px;
+  margin: .75rem 0;
 }
 h4 {
   font-size: .75rem;
@@ -93,8 +118,17 @@ p {
   font-size: 1rem;
   line-height: 26px;
 }
-.header {
-  background-color: red;
+
+.container {
+  max-width: var(--desktop-container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-gap);
+  &--mb {
+    margin-bottom: 3.5rem;
+  }
+}
+.h-100 {
+  height: 100%;
 }
 
 </style>
