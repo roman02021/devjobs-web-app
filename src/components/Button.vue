@@ -55,6 +55,9 @@ const emits = defineEmits(['loadMoreJobs'])
             background-color: var(--hover-secondary-violet);
         }
     }
+    &--square-padding {
+        padding: .75rem;
+    }
     &--dark {
         &.btn--secondary {
             background-color: var(--secondary-dark);

@@ -1,9 +1,12 @@
 <script setup>
 import { ref, computed } from 'vue'
+import useMediaQuery from '../useMediaQuery';
 import Input from './Input.vue';
 import CheckBox from './CheckBox.vue';
 import Button from './Button.vue';
+import Search from '../assets/desktop/icon-search.svg';
 import {themeStore} from '../store';
+import {CONSTANTS} from '../constants';
 
 const props = defineProps({
     jobs: Array,
@@ -46,15 +49,22 @@ function filterJobs(jobs){
     return filteredJobs
 }
 
+const isMobile = ref(useMediaQuery(CONSTANTS.breakpoints.mobile));
+const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
+
 </script>
 
 <template>
+
   <form v-on:submit.prevent="filterJobs(jobs)" class="filter" :class="{'filter--dark': themeStore.isDark()}">
     <Input icon="search" v-model="filterSearchTerm" type="text" placeholder="Filter by title, companies, experties..."/>
     <Input icon="location" v-model="filterLocation" type="text" placeholder="Filter by location..."/>
     <div class="checkbox-with-btn">
-        <CheckBox v-model:checked="filterFullTimeOnly" placeholder="Full Time Only" type="checkbox"/>
-        <Button variant="primary">Search</Button>
+        <CheckBox v-if="!isMobile" v-model:checked="filterFullTimeOnly" :placeholder="`Full Time ${isTablet ? '' : 'Only'}`" type="checkbox"/>
+        <Button variant="primary">
+            <Search class="search-icon" v-if="isMobile"/>
+            <span v-else>Search</span>
+        </Button>
     </div>
   </form>
 </template>
@@ -93,7 +103,16 @@ function filterJobs(jobs){
         }
     }
     @media (max-width: 520px){
-        grid-template-columns: repeat(1,1fr);
+        & > *:first-child {
+            width: 90%;
+            border-right: none;
+        }
+        & > *:nth-child(2) {
+            display: none;
+        }
+        & > *:nth-child(3) {
+            width: 10%;
+        }
     }
 }
 

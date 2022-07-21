@@ -84,9 +84,11 @@ const logoBackground = computed(() => {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
+        margin-bottom: 3rem;
     }
     &__info-container {
         color: var(--dark-grey);
+        
     }
     &__info {
         &:not(:last-child){
@@ -109,6 +111,7 @@ const logoBackground = computed(() => {
     h3 {
         color: var(--very-dark-blue);
         transition: all var(--theme-speed) var(--theme-timing);
+        margin: 3rem 0 1.75rem 0;
     }
     &--dark {
         background-color: var(--very-dark-blue);
