@@ -1,4 +1,7 @@
 export const CONSTANTS = {
+    colors: {
+        primary: "#5964E0"
+    },
     theme: {
         themeLight : "light",
         themeDark : "dark"
@@ -9,9 +12,9 @@ export const CONSTANTS = {
         large: '36px'
     },
     breakpoints: {
-        mobile: '(max-width: 520px)',
-        tablet: '(min-width: 520px) and (max-width: 960px)',
-        desktop: '(min-width: 960px)'
+        mobile: '(max-width: 600px)',
+        tablet: '(min-width: 600px) and (max-width: 1160px)',
+        desktop: '(min-width: 1160px)'
     }
 
 }

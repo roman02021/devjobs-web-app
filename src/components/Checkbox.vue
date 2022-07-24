@@ -11,6 +11,10 @@ const props = defineProps({
     placeholder: {
         type: String,
         default: "",
+    },
+    inModal: {
+        type: Boolean,
+        default: false,
     }
 })
 
@@ -18,7 +22,7 @@ const props = defineProps({
 </script>
 
 <template>
-    <label class="filter-checkbox" :class="{'filter-checkbox--dark': themeStore.isDark()}">
+    <label class="filter-checkbox" :class="{'filter-checkbox--dark': themeStore.isDark(), 'filter-checkbox--modal' : inModal}">
         <div :class="`filter-checkbox__background ${checked ? 'filter-checkbox__background--checked' : ''}`">
             <Check v-if="checked" class="filter-checkbox__check"/>
             <input class="filter-checkbox__input" :checked="props.checked" type="checkbox" @input="$emit('update:checked', $event.target.checked)"/>
@@ -74,6 +78,9 @@ const props = defineProps({
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+    }
+    &--modal {
+        padding: 1.5rem;
     }
     &--dark {
         .filter-checkbox__label {

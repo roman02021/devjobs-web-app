@@ -23,7 +23,7 @@ const props = defineProps({
                     <h3 class="job-bar__title">{{position}}</h3>
                     <div class="job-bar__company">{{company}}</div>
                 </div>
-                <Button :external-link="apply">Apply Now</Button>
+                <Button class="job-bar__apply" :external-link="apply">Apply Now</Button>
             </div>
         </div>
     </div>
@@ -53,6 +53,14 @@ const props = defineProps({
         background-color: var(--very-dark-blue);
         .job-bar__title {
             color: var(--white);
+        }
+    }
+    @media screen and (max-width: $mobile){
+        .job-bar__info {
+            display: none;
+        }
+        .job-bar__apply {
+            width: 100%;
         }
     }
 }

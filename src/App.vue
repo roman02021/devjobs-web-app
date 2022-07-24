@@ -76,6 +76,8 @@ input, button {
   --container-gap: 1.5rem;
   --desktop-max-width: 1110px;
   --desktop-container-width: calc(var(--desktop-max-width) - var(--container-gap) * 2);
+
+
   
 }
 #app {
@@ -86,6 +88,8 @@ input, button {
   text-align: center;
   color: #2c3e50;
   height: 100%;
+  
+
   
 }
 .app-container {

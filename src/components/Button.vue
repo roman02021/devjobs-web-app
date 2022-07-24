@@ -5,13 +5,25 @@ import { themeStore } from '../store';
 const props = defineProps({
     variant: {
         type: String,
-        validators: value => ['primary', 'secondary'].includes(value),
+        validators: value => ['primary', 'secondary', 'search', 'icon'].includes(value),
     },
     link: {
         type: String,
     },
     externalLink: {
         type: String,
+    },
+    fullWidth: {
+        type: Boolean,
+        default: false,
+    },
+    inModal: {
+        type: Boolean,
+        default: false,
+    },
+    type: {
+        type: String,
+        default: 'button'
     }
 })
 
@@ -19,8 +31,8 @@ const emits = defineEmits(['loadMoreJobs'])
 </script>
 
 <template>
-    <div>
-        <button v-if="!link && !externalLink" class="btn" :class="{'btn--primary': variant ==='primary', 'btn--secondary' : variant === 'secondary', 'btn--dark': themeStore.isDark()}">
+    <div :class="{'btn--modal' : inModal}">
+        <button :type="type" v-if="!link && !externalLink" class="btn" :class="{'btn--primary': variant ==='primary', 'btn--secondary' : variant === 'secondary', 'btn--dark': themeStore.isDark(), 'btn--search' : variant === 'search', 'btn--icon' : variant === 'icon', 'btn--full-width' : fullWidth}">
             <span class="btn__text">
                 <slot/>
             </span>
@@ -42,9 +54,11 @@ const emits = defineEmits(['loadMoreJobs'])
     border: none;
     color: var(--white);
     font-weight: bold;
+    display: block;
     text-decoration: none;
     font-size: 1rem;
     transition: all var(--fast) ease-in-out;
+    text-align: center;
     &:hover {
         background-color: var(--light-violet);
     }
@@ -55,8 +69,29 @@ const emits = defineEmits(['loadMoreJobs'])
             background-color: var(--hover-secondary-violet);
         }
     }
+    &--search {
+        @media (max-width: $mobile){
+            height: 48px;
+            width: 48px;
+            padding: 0;
+        }
+    }
+    &--icon {
+        background-color: transparent;
+        padding: 1.5rem;
+        &:hover {
+            background-color: transparent;
+        }
+    }
     &--square-padding {
         padding: .75rem;
+    }
+    &--full-width {
+        width: 100%;
+    }
+    &--modal {
+        margin: 1.5rem;
+        margin-top: 0;
     }
     &--dark {
         &.btn--secondary {
@@ -67,6 +102,7 @@ const emits = defineEmits(['loadMoreJobs'])
             }
         }
     }
+
 }
 
 

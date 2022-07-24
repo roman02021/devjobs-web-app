@@ -46,7 +46,7 @@ const logoBackground = computed(() => {
       </span>
     </div> 
     <div class="job-description__header">
-        <div >
+        <div class="job-description__top">
             <h1 class="job-description__title">{{position}}</h1>
             <div class="job-description__location">
                 {{location}}
@@ -55,7 +55,7 @@ const logoBackground = computed(() => {
         <Button :external-link="apply">Apply Now</Button>
     </div>
     <p>{{description}}</p>
-    <h3>Requierements</h3>
+    <h3>Requirements</h3>
     <p>
         {{requirementsContent}}
     </p>
@@ -124,6 +124,18 @@ const logoBackground = computed(() => {
         }
         
     }
+    @media screen and (max-width: $mobile){
+        .job-description__header {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .job-description__top {
+            margin-bottom: 3rem;
+        }
+        .job-description__title {
+            font-size: 20px;
+        }
+    }
 }
 .list {
     margin: 0;
@@ -133,14 +145,15 @@ const logoBackground = computed(() => {
             list-style: none;
             margin: 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            line-height: 26px;
+            margin-bottom: .5rem;
             &::before {
                 content: '\2022';
                 color: var(--violet);
                 font-weight: bold;
                 margin-right: 2rem;
                 font-size: 1.75rem;
-                line-height: 2.25rem;
             }
         }
     }
@@ -150,7 +163,9 @@ const logoBackground = computed(() => {
             list-style: none;
             margin: 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            line-height: 26px;
+            margin-bottom: .5rem;
             &::before {
                 counter-increment: list-item-counter;
                 content: counter(list-item-counter);
@@ -158,11 +173,11 @@ const logoBackground = computed(() => {
                 font-weight: bold;
                 margin-right: 2rem;
                 font-size: 1rem;
-                line-height: 2.25rem;
                 width: .5rem;
             }
         }
     }
+
 }
 
 </style>

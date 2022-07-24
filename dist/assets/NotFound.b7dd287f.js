@@ -1,1 +1,0 @@
-import{_ as e,r as a,o as _,a as t,k as o}from"./index.c7164c36.js";const r={name:"NotFound",setup(s){return a(o),(n,c)=>(_(),t("div",null," 404 "))}};var d=e(r,[["__scopeId","data-v-42afa546"]]);export{d as default};

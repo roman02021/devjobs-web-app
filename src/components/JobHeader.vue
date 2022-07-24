@@ -94,6 +94,35 @@ const logoBackground = computed(() => {
             color: var(--white);
         }
     }
+    @media screen and (max-width: $mobile){
+        flex-direction: column;
+        overflow: visible;
+        height: fit-content;
+        border-radius: var(--radius);
+        .header__logo-background {
+            position: relative;
+            top: -25px;
+            width: 50px;
+            height: 50px;
+            min-width: fit-content;
+            border-radius: 15px;
+
+        }
+        .header__logo {
+            width: fit-content;
+        }
+        .header__info-container {
+            flex-direction: column;
+            align-items: center;
+            padding: 0 40px 32px 40px;
+        }
+        .header__title {
+            text-align: center;
+        }
+        .header__left-info {
+            margin-bottom: 2rem;
+        }
+    }
 }
 
 </style>

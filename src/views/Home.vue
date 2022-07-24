@@ -5,6 +5,8 @@ import Filters from '../components/Filters.vue'
 import Header from '../components/Header.vue'
 import Button from '../components/Button.vue'
 import JobCard from '../components/JobCard.vue'
+import Icon from '../components/icons/Icon.vue'
+import {themeStore} from '../store'
 
 const jobs = ref(data)
 
@@ -34,14 +36,16 @@ function updateJobsList(updatedJobs) {
 </script>
 
 <template>
+
   <div class="container container--mb">
     <Filters :jobs="jobs" :filteredJobs="filteredJobs" @update-jobs-list="updateJobsList"/>
-    <div class="jobs">
+    <div class="jobs" v-if="!(filteredJobs.length === 0)">
       <JobCard  v-for="job in filteredJobs.slice(0, pageSize * page)" :logo="job.logo" :logo-background="job.logoBackground" :posted-at="job.postedAt" :contract="job.contract" :position="job.position" :company="job.company" :job-id="job.id" :location="job.location" :key="job.id">
 
       </JobCard>
     </div>
-    <Button v-if="!allPagesLoaded" variant="primary" v-on:click="loadMoreJobs" >
+    <h1 class="no-results" :class="{'no-results--dark':themeStore.isDark()}" v-if="filteredJobs.length === 0">No Results</h1>
+    <Button v-if="!allPagesLoaded && !(filteredJobs.length === 0)" variant="primary" v-on:click="loadMoreJobs" >
       Load More
     </Button>
   </div>
@@ -58,6 +62,12 @@ function updateJobsList(updatedJobs) {
   }
   @media (max-width: 520px){
     grid-template-columns: repeat(1,1fr);
+  }
+}
+.no-results {
+  margin: 3rem 0;
+  &--dark {
+    color: var(--white);
   }
 }
 </style>

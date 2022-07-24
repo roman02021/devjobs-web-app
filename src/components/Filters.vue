@@ -5,8 +5,10 @@ import Input from './Input.vue';
 import CheckBox from './CheckBox.vue';
 import Button from './Button.vue';
 import Search from '../assets/desktop/icon-search.svg';
+import Icon from '../components/icons/Icon.vue';
 import {themeStore} from '../store';
 import {CONSTANTS} from '../constants';
+import Modal from './Modal.vue';
 
 const props = defineProps({
     jobs: Array,
@@ -20,6 +22,8 @@ const emit = defineEmits(['updateJobsList'])
 const filterSearchTerm = ref('')
 const filterLocation = ref('')
 const filterFullTimeOnly = ref(false)
+const modalIsOpen = ref(false)
+
 
 function filterByLocation(jobs){
     return jobs.filter(job => job.location.toLocaleLowerCase().includes(filterLocation.value.toLocaleLowerCase()))
@@ -32,7 +36,6 @@ function filterBySearchTerm(jobs) {
 }
 
 function filterByFullTimeOnly(jobs) {
-    console.log(filterFullTimeOnly.value);
     if(Boolean(filterFullTimeOnly.value)){
         return jobs.filter(job => job.contract.toLocaleLowerCase().includes('full'));
     }
@@ -42,12 +45,19 @@ function filterByFullTimeOnly(jobs) {
 
 function filterJobs(jobs){
 
+    modalIsOpen.value = false;
+
     const filteredJobs =  filterByLocation(filterBySearchTerm(filterByFullTimeOnly(jobs)));
 
     emit('updateJobsList', filteredJobs);
 
     return filteredJobs
 }
+function handleFilterBtn(e) {
+    modalIsOpen.value = true;
+    e.preventDefault();
+}
+
 
 const isMobile = ref(useMediaQuery(CONSTANTS.breakpoints.mobile));
 const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
@@ -55,22 +65,35 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
 </script>
 
 <template>
-
+    
   <form v-on:submit.prevent="filterJobs(jobs)" class="filter" :class="{'filter--dark': themeStore.isDark()}">
-    <Input icon="search" v-model="filterSearchTerm" type="text" placeholder="Filter by title, companies, experties..."/>
+    
+    <Input icon="search" v-model="filterSearchTerm" :show-mobile="true" type="text" :placeholder="isTablet || isMobile ? 'Filter by title...' : 'Filter by title, companies, experties...'"/>
     <Input icon="location" v-model="filterLocation" type="text" placeholder="Filter by location..."/>
     <div class="checkbox-with-btn">
+        
         <CheckBox v-if="!isMobile" v-model:checked="filterFullTimeOnly" :placeholder="`Full Time ${isTablet ? '' : 'Only'}`" type="checkbox"/>
-        <Button variant="primary">
-            <Search class="search-icon" v-if="isMobile"/>
+        <Button variant="icon" v-if="isMobile" @keydown.enter.prevent @keyup.enter.prevent @click="handleFilterBtn" >
+            <Icon icon="filter" :height="20" :color="themeStore.isDark() ? '#fff' : '#6E8098'" v-if="isMobile"/>
+        </Button>
+        <Button variant="search" type="submit">
+            <Icon icon="search" :height="20" color="#FFF" v-if="isMobile"/>
             <span v-else>Search</span>
         </Button>
     </div>
+    <Modal v-model:isOpen="modalIsOpen" v-if="modalIsOpen">
+        <Input icon="location" :inModal="true" v-model="filterLocation" type="text" placeholder="Filter by location..."/>
+        <CheckBox v-model:checked="filterFullTimeOnly" placeholder="Full Time Only" type="checkbox" :inModal="true"/>
+        <Button variant="search" :full-width="true" :inModal="true" type="submit">
+            <span>Search</span>
+        </Button>
+    </Modal>
   </form>
 </template>
 
 <style scoped lang="scss">
 .filter {
+
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -91,7 +114,7 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
     &--dark {
         background-color: var(--very-dark-blue);
     }
-    @media (max-width: 960px){
+    @media (max-width: $tablet){
         & > *:first-child {
             width: 30%;
         }
@@ -102,7 +125,7 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
             width: 40%;
         }
     }
-    @media (max-width: 520px){
+    @media (max-width: $mobile){
         & > *:first-child {
             width: 90%;
             border-right: none;
@@ -120,6 +143,10 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-width: 270px;
+    @media (max-width: $mobile){
+        min-width: fit-content;
+    }
     
 }
 </style>
