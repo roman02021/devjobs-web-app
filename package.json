@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gh-pages": "^4.0.0",
     "vite-svg-loader": "^3.4.0",
     "vue": "^3.2.25",
     "vue-router": "^4.1.1"
