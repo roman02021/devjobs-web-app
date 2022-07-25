@@ -3,7 +3,6 @@ import { ref, watch } from 'vue'
 import data from "../data.json"
 import {themeStore} from '../store'
 import {CONSTANTS} from '../constants';
-import 
 
 import Moon from '../assets/desktop/icon-moon.svg'
 import Sun from '../assets/desktop/icon-sun.svg'
