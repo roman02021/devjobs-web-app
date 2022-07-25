@@ -1,10 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref} from 'vue'
 import useMediaQuery from '../useMediaQuery';
 import Input from './Input.vue';
 import CheckBox from './CheckBox.vue';
 import Button from './Button.vue';
-import Search from '../assets/desktop/icon-search.svg';
 import Icon from '../components/icons/Icon.vue';
 import {themeStore} from '../store';
 import {CONSTANTS} from '../constants';
