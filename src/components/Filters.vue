@@ -2,7 +2,7 @@
 import { ref} from 'vue'
 import useMediaQuery from '../useMediaQuery';
 import Input from './Input.vue';
-import CheckBox from './CheckBox.vue';
+import CheckBox from '@/components/CheckBox.vue';
 import Button from './Button.vue';
 import Icon from './icons/Icon.vue';
 import {themeStore} from '../store';
