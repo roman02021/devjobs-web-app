@@ -30,6 +30,7 @@ const logoBackground = computed(() => {
 <template>
 
   <div class="job-card" :class="{'job-card--dark': themeStore.isDark()}">
+  <slot/>
     <div class="job-card__logo-background" :style="logoBackground">
       <img class="job-card__logo"  :src="logoUrl"/>
     </div>
