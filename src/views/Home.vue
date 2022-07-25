@@ -38,8 +38,8 @@ function updateJobsList(updatedJobs) {
   <div class="container container--mb">
     <Filters :jobs="jobs" :filteredJobs="filteredJobs" @update-jobs-list="updateJobsList"/>
     <div class="jobs" v-if="!(filteredJobs.length === 0)">
-      <JobCard  v-for="job in filteredJobs.slice(0, pageSize * page)" :logo="job.logo" :logo-background="job.logoBackground" :posted-at="job.postedAt" :contract="job.contract" :position="job.position" :company="job.company" :job-id="job.id" :location="job.location" :key="job.id">
-        {{job.logo}}
+      <JobCard  v-for="job in filteredJobs.slice(0, pageSize * page)" :logo="`.${job.logo}`" :logo-background="job.logoBackground" :posted-at="job.postedAt" :contract="job.contract" :position="job.position" :company="job.company" :job-id="job.id" :location="job.location" :key="job.id">
+        {{`.${job.logo}`}}
       </JobCard>
     </div>
     <h1 class="no-results" :class="{'no-results--dark':themeStore.isDark()}" v-if="filteredJobs.length === 0">No Results</h1>
