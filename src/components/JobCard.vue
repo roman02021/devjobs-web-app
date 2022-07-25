@@ -24,6 +24,7 @@ const props = defineProps({
 
 const urla = `.${props.logo}`.toString();
 const url = new URL(urla, import.meta.url).href;
+console.log(url, urla, typeof(urla));
 
 const logoBackground = computed(() => {
   return {
