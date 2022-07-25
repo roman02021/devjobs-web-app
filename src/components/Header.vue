@@ -19,7 +19,9 @@ watch(isDark, () =>{
 const isMobile = ref(useMediaQuery(CONSTANTS.breakpoints.mobile));
 const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
 
-const imgUrl = new URL('./assets/mobile/bg-pattern-header.svg', import.meta.url).href;
+const imgUrl = new URL('../assets/mobile/bg-pattern-header.svg', import.meta.url).href;
+const imgUrlTablet = new URL('../assets/tablet/bg-pattern-header.svg', import.meta.url).href;
+const imgUrlDesktop = new URL('../assets/desktop/bg-pattern-header.svg', import.meta.url).href;
 
 </script>
 
@@ -27,8 +29,8 @@ const imgUrl = new URL('./assets/mobile/bg-pattern-header.svg', import.meta.url)
     <div class="header">
         <picture>
             <source :media="CONSTANTS.breakpoints.mobile" :srcset="imgUrl"/>
-            <source :media="CONSTANTS.breakpoints.tablet" srcset="@/assets/tablet/bg-pattern-header.svg"/>
-            <img src="../assets/desktop/bg-pattern-header.svg" alt="background" class="header__background"/>
+            <source :media="CONSTANTS.breakpoints.tablet" :srcset="imgUrlTablet"/>
+            <img :src="imgUrlDesktop" alt="background" class="header__background"/>
         </picture>
         <div class="container header__container">
             <router-link :to="{ path: '/' }">
