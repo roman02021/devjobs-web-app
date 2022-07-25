@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import data from "../data.json"
 import {themeStore} from '../store'
 import {CONSTANTS} from '../constants';
+import 
 
 import Moon from '../assets/desktop/icon-moon.svg'
 import Sun from '../assets/desktop/icon-sun.svg'
@@ -19,14 +20,14 @@ watch(isDark, () =>{
 const isMobile = ref(useMediaQuery(CONSTANTS.breakpoints.mobile));
 const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
 
-
+const imgUrl = new URL('./assets/mobile/bg-pattern-header.svg', import.meta.url).href;
 
 </script>
 
 <template>
     <div class="header">
         <picture>
-            <source :media="CONSTANTS.breakpoints.mobile" :srcset="require('./assets/mobile/bg-pattern-header.svg').default"/>
+            <source :media="CONSTANTS.breakpoints.mobile" :srcset="imgUrl"/>
             <source :media="CONSTANTS.breakpoints.tablet" srcset="@/assets/tablet/bg-pattern-header.svg"/>
             <img src="../assets/desktop/bg-pattern-header.svg" alt="background" class="header__background"/>
         </picture>
