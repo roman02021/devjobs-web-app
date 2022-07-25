@@ -1,11 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import data from "../data.json"
 import Filters from '../components/Filters.vue'
-import Header from '../components/Header.vue'
 import Button from '../components/Button.vue'
 import JobCard from '../components/JobCard.vue'
-import Icon from '../components/icons/Icon.vue'
 import {themeStore} from '../store'
 
 const jobs = ref(data)
