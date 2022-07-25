@@ -22,7 +22,7 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
 const imgUrl = new URL('../assets/mobile/bg-pattern-header.svg', import.meta.url).href;
 const imgUrlTablet = new URL('../assets/tablet/bg-pattern-header.svg', import.meta.url).href;
 const imgUrlDesktop = new URL('../assets/desktop/bg-pattern-header.svg', import.meta.url).href;
-
+const logo = new URL('../assets/desktop/logo.svg', import.meta.url).href;
 </script>
 
 <template>
@@ -34,7 +34,7 @@ const imgUrlDesktop = new URL('../assets/desktop/bg-pattern-header.svg', import.
         </picture>
         <div class="container header__container">
             <router-link :to="{ path: '/' }">
-                <img class="header__logo" src="../assets/desktop/logo.svg"/>
+                <img class="header__logo" :src="logo"/>
             </router-link>
             <Switch theme-switch="true" v-model:checked="isDark">
                 <template #icon-left>
