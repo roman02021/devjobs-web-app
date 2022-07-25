@@ -2,7 +2,7 @@
 import { ref} from 'vue'
 import useMediaQuery from '../useMediaQuery';
 import Input from './Input.vue';
-import CheckBox from './CheckBox.vue';
+// import CheckBox from './CheckBox.vue';
 import Button from './Button.vue';
 import Icon from '../components/icons/Icon.vue';
 import {themeStore} from '../store';
@@ -71,7 +71,7 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
     <Input icon="location" v-model="filterLocation" type="text" placeholder="Filter by location..."/>
     <div class="checkbox-with-btn">
         
-        <CheckBox v-if="!isMobile" v-model:checked="filterFullTimeOnly" :placeholder="`Full Time ${isTablet ? '' : 'Only'}`" type="checkbox"/>
+        <!-- <CheckBox v-if="!isMobile" v-model:checked="filterFullTimeOnly" :placeholder="`Full Time ${isTablet ? '' : 'Only'}`" type="checkbox"/> -->
         <Button variant="icon" v-if="isMobile" @keydown.enter.prevent @keyup.enter.prevent @click="handleFilterBtn" >
             <Icon icon="filter" :height="20" :color="themeStore.isDark() ? '#fff' : '#6E8098'" v-if="isMobile"/>
         </Button>
@@ -82,7 +82,7 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
     </div>
     <Modal v-model:isOpen="modalIsOpen" v-if="modalIsOpen">
         <Input icon="location" :inModal="true" v-model="filterLocation" type="text" placeholder="Filter by location..."/>
-        <CheckBox v-model:checked="filterFullTimeOnly" placeholder="Full Time Only" type="checkbox" :inModal="true"/>
+        <!-- <CheckBox v-model:checked="filterFullTimeOnly" placeholder="Full Time Only" type="checkbox" :inModal="true"/> -->
         <Button variant="search" :full-width="true" :inModal="true" type="submit">
             <span>Search</span>
         </Button>

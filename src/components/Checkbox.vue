@@ -1,5 +1,4 @@
 <script setup>
-import { ref, computed } from 'vue'
 import Check from '../assets/desktop/icon-check.svg'
 import { themeStore } from '../store';
 
