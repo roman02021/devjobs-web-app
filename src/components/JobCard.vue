@@ -25,9 +25,6 @@ const logoBackground = computed(() => {
 })
 
 
-
-
-
 </script>
 
 <template>
