@@ -15,9 +15,9 @@ const props = defineProps({
 })
 
 const logoUrl = computed(() => {
-  const urla = `.${props.logo}`
-  const url = new URL(urla, import.meta.url).href;
-  console.log(url, props.logo);
+  const urla = `.${props.logo}`;
+  const url = new URL('../assets/logos/scoot.svg', import.meta.url).href;
+  console.log(url, props.logo, urla);
   return url;
 })
 
