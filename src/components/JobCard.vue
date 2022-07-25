@@ -16,7 +16,7 @@ const props = defineProps({
 
 const logoUrl = computed(() => {
   const url = new URL(`.${props.logo}`, import.meta.url);
-  console.log(url);
+  console.log(url, props.logo);
   return url;
 })
 
