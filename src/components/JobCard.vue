@@ -22,7 +22,7 @@ const props = defineProps({
 //   return url;
 // })
 
-const urla = `.${props.logo}`;
+const urla = `.${props.logo}`.toString();
 const url = new URL(urla, import.meta.url).href;
 
 const logoBackground = computed(() => {
