@@ -26,8 +26,8 @@ const isTablet = ref(useMediaQuery(CONSTANTS.breakpoints.tablet));
 <template>
     <div class="header">
         <picture>
-            <source :media="CONSTANTS.breakpoints.mobile" srcset="../assets/mobile/bg-pattern-header.svg"/>
-            <source :media="CONSTANTS.breakpoints.tablet" srcset="../assets/tablet/bg-pattern-header.svg"/>
+            <source :media="CONSTANTS.breakpoints.mobile" srcset="@/assets/mobile/bg-pattern-header.svg"/>
+            <source :media="CONSTANTS.breakpoints.tablet" srcset="@/assets/tablet/bg-pattern-header.svg"/>
             <img src="../assets/desktop/bg-pattern-header.svg" alt="background" class="header__background"/>
         </picture>
         <div class="container header__container">
