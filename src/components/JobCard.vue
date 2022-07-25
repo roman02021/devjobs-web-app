@@ -14,13 +14,16 @@ const props = defineProps({
     location: String
 })
 
-const logoUrl = computed(() => {
-  const urla = `.${props.logo}`;
-  console.log(typeof(urla));
-  const url = new URL(urla, import.meta.url).href;
-  console.log(url, props.logo, urla);
-  return url;
-})
+// const logoUrl = computed(() => {
+//   const urla = `.${props.logo}`;
+//   console.log(typeof(urla));
+//   const url = new URL(urla, import.meta.url).href;
+//   console.log(url, props.logo, urla);
+//   return url;
+// })
+
+const urla = `.${props.logo}`;
+const url = new URL(urla, import.meta.url).href;
 
 const logoBackground = computed(() => {
   return {
@@ -36,7 +39,7 @@ const logoBackground = computed(() => {
   <div class="job-card" :class="{'job-card--dark': themeStore.isDark()}">
   <slot/>
     <div class="job-card__logo-background" :style="logoBackground">
-      <img class="job-card__logo"  :src="logoUrl"/>
+      <img class="job-card__logo"  :src="url"/>
     </div>
     <div class="job-card__info-container">
       <span class="job-card__info">
