@@ -29,13 +29,7 @@ const props = defineProps({
 // const url = new URL(./dir/${}, import.meta.url);
 
 
-function getImageUrl(name) {
-  return new URL(`./${name}`, import.meta.url).href
-}
-
 const newUrl = props.logo.substring(props.logo.lastIndexOf('/') + 1);
-
-console.log(import.meta.url);
 
 const logoBackground = computed(() => {
   return {

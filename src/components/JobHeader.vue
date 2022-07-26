@@ -5,8 +5,6 @@ import {themeStore} from '../store'
 
 import Button from '../components/Button.vue'
 
-const isDark = ref(themeStore.isDark())
-
 const props = defineProps({
     logo: String,
     logoBackground: String,
@@ -14,9 +12,9 @@ const props = defineProps({
     website: String,
 })
 
-const logoUrl = computed(() => {
-  return new URL(`.${props.logo}`, import.meta.url)
-})
+// const logoUrl = computed(() => {
+//   return new URL(`.${props.logo}`, import.meta.url)
+// })
 
 const logoBackground = computed(() => {
   return {
@@ -24,12 +22,14 @@ const logoBackground = computed(() => {
   }
 })
 
+const newUrl = props.logo.substring(props.logo.lastIndexOf('/') + 1);
+
 </script>
 
 <template>
     <div class="header" :class="{'header--dark': themeStore.isDark()}">
         <div class="header__logo-background" :style="logoBackground">
-            <img class="header__logo" :src="logoUrl"/>
+            <img class="header__logo" :src="newUrl"/>
         </div>
         <div class="header__info-container">
             <div class="header__left-info">
