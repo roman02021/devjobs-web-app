@@ -29,7 +29,7 @@ const newUrl = props.logo.substring(props.logo.lastIndexOf('/') + 1);
 <template>
     <div class="header" :class="{'header--dark': themeStore.isDark()}">
         <div class="header__logo-background" :style="logoBackground">
-            <img class="header__logo" :src="newUrl"/>
+            <img class="header__logo" :src="`../${newUrl}`"/>
         </div>
         <div class="header__info-container">
             <div class="header__left-info">
