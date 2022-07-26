@@ -28,7 +28,11 @@ const props = defineProps({
 
 // const url = new URL(./dir/${}, import.meta.url);
 
-const url = new URL(`./dir/${props.logo}`, import.meta.url);
+
+function getImageUrl(name) {
+  return new URL(`./dir/${name}`, import.meta.url).href
+}
+
 
 const logoBackground = computed(() => {
   return {
@@ -44,7 +48,7 @@ const logoBackground = computed(() => {
   <div class="job-card" :class="{'job-card--dark': themeStore.isDark()}">
   <slot/>
     <div class="job-card__logo-background" :style="logoBackground">
-      <img class="job-card__logo"  :src="url"/>
+      <img class="job-card__logo"  :src="getImageUrl(logo)"/>
     </div>
     <div class="job-card__info-container">
       <span class="job-card__info">
