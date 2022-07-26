@@ -27,5 +27,6 @@ export default defineConfig({
     esbuildOptions: {
       target: 'es2020',
     }
-  }
+  },
+  assetsInclude: ['**/*.svg']
 })
