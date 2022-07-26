@@ -30,7 +30,7 @@ const props = defineProps({
 
 
 function getImageUrl(name) {
-  return new URL(`./dir/${name}`, import.meta.url).href
+  return new URL(`./${name}`, import.meta.url).href
 }
 
 
