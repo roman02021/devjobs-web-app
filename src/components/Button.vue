@@ -24,6 +24,10 @@ const props = defineProps({
     type: {
         type: String,
         default: 'button'
+    },
+    centered: {
+        type: Boolean,
+        default: false,
     }
 })
 
@@ -31,7 +35,7 @@ const emits = defineEmits(['loadMoreJobs'])
 </script>
 
 <template>
-    <div :class="{'btn--modal' : inModal}">
+    <div :class="{'btn--modal' : inModal, 'btn--centered' : centered}">
         <button :type="type" v-if="!link && !externalLink" class="btn" :class="{'btn--primary': variant ==='primary', 'btn--secondary' : variant === 'secondary', 'btn--dark': themeStore.isDark(), 'btn--search' : variant === 'search', 'btn--icon' : variant === 'icon', 'btn--full-width' : fullWidth}">
             <span class="btn__text">
                 <slot/>
@@ -61,6 +65,7 @@ const emits = defineEmits(['loadMoreJobs'])
     text-align: center;
     &:hover {
         background-color: var(--light-violet);
+        /* transform: translateY(-3px); */
     }
     &--secondary {
         color: var(--violet);
@@ -75,6 +80,10 @@ const emits = defineEmits(['loadMoreJobs'])
             width: 48px;
             padding: 0;
         }
+    }
+    &--centered {
+        display: flex;
+        justify-content: center;
     }
     &--icon {
         background-color: transparent;

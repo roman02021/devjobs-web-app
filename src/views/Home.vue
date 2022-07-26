@@ -42,7 +42,7 @@ function updateJobsList(updatedJobs) {
       </JobCard>
     </div>
     <h1 class="no-results" :class="{'no-results--dark':themeStore.isDark()}" v-if="filteredJobs.length === 0">No Results</h1>
-    <Button v-if="!allPagesLoaded && !(filteredJobs.length === 0)" variant="primary" v-on:click="loadMoreJobs" >
+    <Button v-if="!allPagesLoaded && !(filteredJobs.length === 0)" variant="primary" :centered="true" v-on:click="loadMoreJobs" >
       Load More
     </Button>
   </div>
