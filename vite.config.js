@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, optimizeDeps } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import svgLoader from 'vite-svg-loader'
 import path from 'path'
@@ -19,5 +19,13 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+  },
+  build: {
+    target: 'es2020'
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020',
+    }
   }
 })
