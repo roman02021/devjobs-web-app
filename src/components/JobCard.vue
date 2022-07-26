@@ -33,6 +33,8 @@ function getImageUrl(name) {
   return new URL(`./${name}`, import.meta.url).href
 }
 
+const newUrl = props.logo.substring(props.logo.lastIndexOf('/') + 1);
+
 console.log(import.meta.url);
 
 const logoBackground = computed(() => {
@@ -48,7 +50,7 @@ const logoBackground = computed(() => {
 
   <div class="job-card" :class="{'job-card--dark': themeStore.isDark()}">
   <slot/>
-    <div class="job-card__logo-background" :style="logoBackground">
+    <div class="job-card__logo-background" :style="newUrl">
       <img class="job-card__logo"  :src="logo"/>
     </div>
     <div class="job-card__info-container">
