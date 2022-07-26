@@ -28,7 +28,7 @@ const props = defineProps({
 
 // const url = new URL(./dir/${}, import.meta.url);
 
-const url = new URL(props.logo, import.meta.url);
+const url = new URL(`${props.logo}`, import.meta.url);
 
 const logoBackground = computed(() => {
   return {
