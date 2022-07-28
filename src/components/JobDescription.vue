@@ -116,6 +116,7 @@ const props = defineProps({
         
     }
     @media screen and (max-width: $mobile){
+        padding: 2.5rem 1.5rem 2.5rem 1.5rem;
         .job-description__header {
             flex-direction: column;
             align-items: stretch;
@@ -145,6 +146,9 @@ const props = defineProps({
                 font-weight: bold;
                 margin-right: 2rem;
                 font-size: 1.75rem;
+                @media screen and (max-width: $mobile){
+                    margin-right: 1.5rem;
+                }
             }
         }
     }
@@ -165,9 +169,13 @@ const props = defineProps({
                 margin-right: 2rem;
                 font-size: 1rem;
                 width: .5rem;
+                @media screen and (max-width: $mobile){
+                    margin-right: 1.5rem;
+                }
             }
         }
     }
+
 
 }
 
